@@ -1,4 +1,5 @@
 class PokerHand
+  RANKING = ['A', 'K', 'Q', 'J', '10', '9', '8', '7', '6', '5', '4', '3', '2', 'A']
   def initialize(*cards)
     @cards = extract_cards(cards)
   end
@@ -8,6 +9,8 @@ class PokerHand
       two_pair
     elsif pair?
       pair
+    else
+      high_card
     end
   end
 
@@ -50,5 +53,17 @@ class PokerHand
       :two_pair,
       pairs.map {|value, _| value }
     ]
+  end
+
+  def high_card
+    ranking =  @cards.sort do |a, b|
+      a = RANKING.index(a.value)
+      b = RANKING.index(b.value)
+
+      return -1 if a.nil?
+      return  1 if b.nil?
+      a <=> b
+    end
+    [:high_card, [ranking.first.value]]
   end
 end
