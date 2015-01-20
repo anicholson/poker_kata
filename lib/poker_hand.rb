@@ -4,7 +4,9 @@ class PokerHand
   end
 
   def hand
-    if pair?
+    if two_pair?
+      two_pair
+    elsif pair?
       pair
     end
   end
@@ -13,12 +15,16 @@ class PokerHand
 
   def extract_cards(cards)
     cards.map do |card_string|
-      value, suit = card_string[0], card_string[1]
+      value, suit = card_string[0...-1], card_string[-1]
       Card.new(value, suit)
     end
   end
 
   class Card < Struct.new(:value, :suit); end
+
+  def two_pair?
+    pair? && pairs.count == 2
+  end
 
   def pair?
     @point_value_groups ||= @cards.reduce(Hash.new(0)) do |h, card|
@@ -31,7 +37,18 @@ class PokerHand
 
   def pair
     [ :pair,
-      [@point_value_groups.select {|value, count| count == 2 }.first[0]]
+      [pairs.first[0]]
+    ]
+  end
+
+  def pairs
+    @point_value_groups.select { |value, count| count == 2 }
+  end
+
+  def two_pair
+    [
+      :two_pair,
+      pairs.map {|value, _| value }
     ]
   end
 end
