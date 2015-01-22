@@ -1,5 +1,58 @@
-class PokerHand
+class Card < Struct.new(:value, :suit)
   RANKING = ['A', 'K', 'Q', 'J', '10', '9', '8', '7', '6', '5', '4', '3', '2', 'A']
+
+  def <=>(other)
+    if other.is_a? Card
+      RANKING.index(value) <=> RANKING.index(other.value)
+    else
+      value <=> other
+    end
+  end
+end
+
+class HighCard
+  def self.run(cards)
+    [
+      :high_card,
+      [cards.first.value]
+    ]
+  end
+end
+
+class Pair
+  def self.run(cards)
+    if self.pair_found?(cards)
+      [
+        :pair,
+        [@pair]
+      ]
+    end
+  end
+
+  def self.pair_found?(cards)
+    return false if cards.length < 2
+
+    if pair? *cards.take(2)
+      @pair = cards.first.value
+      return true
+    else
+      cards.shift
+      pair_found?(cards)
+    end
+  end
+
+  def self.pair?(a, b = Card.new)
+    a.value == b.value
+  end
+end
+
+class ThreeOfAKind
+  def self.run(cards)
+
+  end
+end
+
+class PokerHand
   def initialize(*cards)
     @cards = extract_cards(cards)
   end
@@ -20,7 +73,7 @@ class PokerHand
     cards.map do |card_string|
       value, suit = card_string[0...-1], card_string[-1]
       Card.new(value, suit)
-    end
+    end.sort
   end
 
   class Card < Struct.new(:value, :suit); end
