@@ -1,6 +1,7 @@
 require_relative './card'
 require_relative './poker_hand_check'
 require_relative './counts_by_value'
+require_relative './three_of_a_kind'
 require_relative './two_pair'
 require_relative './pair'
 require_relative './high_card'
@@ -9,6 +10,7 @@ class Poker
   attr_reader :cards
 
   POSSIBLE_HANDS = [
+    ThreeOfAKind,
     TwoPair,
     Pair,
     HighCard
