@@ -1,24 +1,5 @@
 require_relative './card'
-
-class PokerHandCheck
-  def initialize(cards = [])
-    @cards = cards
-  end
-
-  def result
-    @result ||= run_check
-  end
-
-  def present?
-    result != :not_present
-  end
-
-  private
-
-  def run_check
-    raise NotImplementedError
-  end
-end
+require_relative './poker_hand_check'
 
 class HighCard < PokerHandCheck
   def run_check

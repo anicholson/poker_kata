@@ -23,6 +23,7 @@ describe Poker do
     expect(subject.hand).to eq([:two_pair, ['A', '10']])
   end
 
+  it 'recognises three-of-a-kind' do
     subject = Poker.new '2D', '2C', '3D', '4H', '2H'
 
     expect(subject.hand).to eq([:three_of_a_kind, ['2']])
