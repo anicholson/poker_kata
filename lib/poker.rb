@@ -5,7 +5,7 @@ class HighCard < PokerHandCheck
   def run_check
     [
       :high_card,
-      [@cards.first.value]
+      [cards.first.value]
     ]
   end
 end
@@ -41,11 +41,37 @@ class Pair < PokerHandCheck
   end
 end
 
+class TwoPair < PokerHandCheck
+  private
+
+  def run_check
+    if pairs.count == 2
+      [
+        :two_pair,
+        pairs
+      ]
+    else
+      :not_present
+    end
+  end
+
+  def pairs
+    count_of_card_values.select{|value, count| count == 2}.map(&:first)
+  end
+
+  def count_of_card_values
+    cards.each_with_object({}) do |card, counter|
+      counter[card.value] ||= 0
+      counter[card.value]  += 1
+    end
+  end
+end
 
 class Poker
   attr_reader :cards
 
   POSSIBLE_HANDS = [
+    TwoPair,
     Pair,
     HighCard
   ]
@@ -65,8 +91,6 @@ class Poker
   end
 
   private
-
-
 
   def extract_cards(cards)
     cards.map do |card_string|
