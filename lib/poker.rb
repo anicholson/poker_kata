@@ -9,7 +9,7 @@ require_relative './high_card'
 class Poker
   attr_reader :cards
 
-  POSSIBLE_HANDS = [
+  HANDS_IN_DESCENDING_ORDER = [
     ThreeOfAKind,
     TwoPair,
     Pair,
@@ -21,16 +21,21 @@ class Poker
   end
 
   def hand
-    strategies.detect do |candidate_hand|
-      candidate_hand.present?
-    end.result
-  end
-
-  def strategies
-    POSSIBLE_HANDS.map { |strategy| strategy.new(@cards) }
+    best_hand.result
   end
 
   private
+
+  def best_hand
+    strategies.detect do |candidate_hand|
+      candidate_hand.present?
+    end
+  end
+
+  def strategies
+    HANDS_IN_DESCENDING_ORDER.map { |strategy| strategy.new(@cards) }
+  end
+
 
   def extract_cards(cards)
     cards.map do |card_string|
