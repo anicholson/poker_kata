@@ -28,4 +28,14 @@ describe Poker do
 
     expect(subject.hand).to eq([:three_of_a_kind, ['2']])
   end
+
+  it 'recognises a straight' do
+    subject = Poker.new '5H', '4C', '3D', '2S', 'AH'
+
+    expect(subject.hand).to eq([:straight, ['5']])
+
+    subject = Poker.new 'AS', 'KS', 'QS', 'JS', '10H'
+
+    expect(subject.hand).to eq([:straight, ['A']])
+  end
 end
