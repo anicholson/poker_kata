@@ -44,4 +44,10 @@ describe Poker do
 
     expect(subject.hand).to eq([:flush, ['A']])
   end
+
+  it 'recognises a full house' do
+    subject = Poker.new 'AH', '5S', '5H', '5D', 'AD'
+
+    expect(subject.hand).to eq([:full_house, ['5', 'A']])
+  end
 end
