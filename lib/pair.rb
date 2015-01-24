@@ -1,6 +1,10 @@
 class Pair < PokerHandCheck
+  private
+
+  include CountsByValue
+
   def run_check
-    if pair_found?(@cards.dup)
+    if pair?
       [
         :pair,
         [@pair]
@@ -10,21 +14,11 @@ class Pair < PokerHandCheck
     end
   end
 
-  private
-
-  def pair_found?(cards)
-    return false if cards.length < 2
-
-    if pair? *cards.take(2)
-      @pair = cards.first.value
-      return true
-    else
-      cards.shift
-      pair_found?(cards)
-    end
-  end
-
-  def pair?(a, b = Card.new)
-    a.value == b.value
+  def pair?
+    @pair = count_of_card_values.detect do |_value, count|
+      count == 2
+    end.first
+  rescue
+    false
   end
 end
