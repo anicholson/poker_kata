@@ -15,7 +15,7 @@ class FullHouse < PokerHandCheck
   end
 
   def triple?
-    @triple = count_of_card_values.detect do |value, count|
+    @triple = count_of_card_values.detect do |_value, count|
       count == 3
     end.first
   rescue
@@ -23,7 +23,7 @@ class FullHouse < PokerHandCheck
   end
 
   def pair?
-    @pair = count_of_card_values.detect do |value, count|
+    @pair = count_of_card_values.detect do |_value, count|
       count == 2
     end.first
   rescue

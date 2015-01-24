@@ -45,7 +45,6 @@ class Poker
     HANDS_IN_DESCENDING_ORDER.map { |strategy| strategy.new(@cards) }
   end
 
-
   def extract_cards(cards)
     cards.map do |card_string|
       value, suit = card_string[0...-1], card_string[-1]

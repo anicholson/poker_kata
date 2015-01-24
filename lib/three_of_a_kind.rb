@@ -1,4 +1,8 @@
 class ThreeOfAKind < PokerHandCheck
+  private
+
+  include CountsByValue
+
   def run_check
     if triple
       [
@@ -10,16 +14,12 @@ class ThreeOfAKind < PokerHandCheck
     end
   end
 
-  private
-
   def triple
-    count_of_card_values.detect do |value, count|
+    count_of_card_values.detect do |_value, count|
       count == 3
     end.first
 
   rescue
     false
   end
-
-  include CountsByValue
 end

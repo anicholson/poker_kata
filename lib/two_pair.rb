@@ -1,22 +1,24 @@
 class TwoPair < PokerHandCheck
   private
 
+  include CountsByValue
+
   def run_check
-    if pairs.count == 2
+    if pairs?
       [
         :two_pair,
-        pairs
+        @pairs
       ]
     else
       :not_present
     end
   end
 
-  def pairs
-    count_of_card_values.select{|value, count| count == 2}.map(&:first)
+  def pairs?
+    @pairs = count_of_card_values.select do |_value, count|
+      count == 2
+    end.map(&:first)
+
+    @pairs.count == 2
   end
-
-  private
-
-  include CountsByValue
 end

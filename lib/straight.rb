@@ -37,15 +37,15 @@ class Straight < PokerHandCheck
   end
 
   def all_different_values?
-    count_of_card_values.none? {|value, count| count > 1 }
+    count_of_card_values.none? { |_value, count| count > 1 }
   end
 
   def any_ace?
-    cards.any? {|card| card.value == 'A' }
+    cards.any? { |card| card.value == 'A' }
   end
 
   def ace_low_straight?
-    ace_low_straight = Set.new(%w[5 4 3 2 A])
+    ace_low_straight = Set.new(%w(5 4 3 2 A))
     my_card_values   = Set.new(cards.map(&:value))
 
     ace_low_straight == my_card_values
