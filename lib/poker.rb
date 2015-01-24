@@ -38,12 +38,10 @@ class Poker
   private
 
   def best_hand
-    strategies.detect do |candidate_hand|
-      candidate_hand.present?
-    end
+    candidate_hands.detect(&:present?)
   end
 
-  def strategies
+  def candidate_hands
     HANDS_IN_DESCENDING_ORDER.map { |strategy| strategy.new(@cards) }
   end
 
