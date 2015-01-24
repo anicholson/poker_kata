@@ -50,4 +50,10 @@ describe Poker do
 
     expect(subject.hand).to eq([:full_house, ['5', 'A']])
   end
+
+  it 'recognises a four-of-a-kind' do
+    subject = Poker.new '2D', '2C', '3D', '2S', '2H'
+
+    expect(subject.hand).to eq([:four_of_a_kind, ['2']])
+  end
 end
