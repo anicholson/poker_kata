@@ -1,5 +1,6 @@
 require_relative './card'
 require_relative './poker_hand_check'
+require_relative './counts_by_suit'
 require_relative './counts_by_value'
 require_relative './four_of_a_kind'
 require_relative './full_house'
