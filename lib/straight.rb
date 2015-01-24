@@ -5,11 +5,13 @@ class Straight < PokerHandCheck
 
   include CountsByValue
 
+  attr_reader :high_card
+
   def run_check
     if straight?
       [
         :straight,
-        [@high_card.value]
+        [high_card.value]
       ]
     else
       :not_present

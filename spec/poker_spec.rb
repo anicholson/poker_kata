@@ -56,4 +56,10 @@ describe Poker do
 
     expect(subject.hand).to eq([:four_of_a_kind, ['2']])
   end
+
+  it 'recognises a straight flush' do
+    subject = Poker.new 'AH', 'KH', 'QH', 'JH', '10H'
+
+    expect(subject.hand).to eq([:straight_flush, ['A']])
+  end
 end

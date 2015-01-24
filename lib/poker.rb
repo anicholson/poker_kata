@@ -6,6 +6,7 @@ require_relative './four_of_a_kind'
 require_relative './full_house'
 require_relative './flush'
 require_relative './straight'
+require_relative './straight_flush'
 require_relative './three_of_a_kind'
 require_relative './two_pair'
 require_relative './pair'
@@ -15,6 +16,7 @@ class Poker
   attr_reader :cards
 
   HANDS_IN_DESCENDING_ORDER = [
+    StraightFlush,
     FourOfAKind,
     FullHouse,
     Flush,
