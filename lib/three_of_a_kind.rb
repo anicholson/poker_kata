@@ -16,11 +16,8 @@ class ThreeOfAKind < PokerHandCheck
   end
 
   def triple?
-    triple_value = count_of_card_values.detect do |_value, count|
-      count == 3
-    end.first
-
-    @triple = cards.select {|card| card.value == triple_value }
+    @triple = cards_i_have_n_of 3
+    @triple.any?
   rescue
     false
   end

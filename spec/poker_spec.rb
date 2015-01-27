@@ -3,7 +3,7 @@ require 'poker'
 
 describe Poker do
   describe 'hand recognition' do
-    it 'recognises high card', focus: true do
+    it 'recognises high card' do
       subject = Poker.new('KH', '3H', '4D', '5S', '9C').hand
 
       expect(subject.hand).to eq(:high_card)

@@ -16,11 +16,8 @@ class FourOfAKind < PokerHandCheck
   end
 
   def quad?
-    quad_value = count_of_card_values.detect do |_value, count|
-      count == 4
-    end.first
-
-    @quad = cards.select {|card| card.value == quad_value }
+    @quad = cards_i_have_n_of 4
+    @quad.any?
   rescue
     false
   end

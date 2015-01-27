@@ -16,11 +16,8 @@ class Pair < PokerHandCheck
   end
 
   def pair?
-    pair_value = count_of_card_values.detect do |_value, count|
-      count == 2
-    end.first
-
-    @pair = cards.select {|card| card.value == pair_value }
+    @pair = cards_i_have_n_of(2)
+    @pair.any?
   rescue
     false
   end
