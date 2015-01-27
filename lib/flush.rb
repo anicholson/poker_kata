@@ -7,10 +7,12 @@ class Flush < PokerHandCheck
 
   def run_check
     if all_cards_have_the_same_suit?
-      [
-        :flush,
-        [cards.first.value]
-      ]
+      Hand.new(
+        hand: :flush,
+        cards: cards,
+        high_card: cards.first,
+        suit: cards.first.suit
+      )
     else
       :not_present
     end

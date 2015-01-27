@@ -5,20 +5,23 @@ class TwoPair < PokerHandCheck
 
   def run_check
     if pairs?
-      [
-        :two_pair,
-        @pairs
-      ]
+      Hand.new(
+        hand: :two_pair,
+        cards: @pairs,
+        suit: :NA
+      )
     else
       :not_present
     end
   end
 
   def pairs?
-    @pairs = count_of_card_values.select do |_value, count|
+    pair_values = count_of_card_values.select do |_value, count|
       count == 2
     end.map(&:first)
 
-    @pairs.count == 2
+    if pair_values.count == 2
+      @pairs = cards.select {|card| pair_values.include? card.value }
+    end
   end
 end

@@ -5,10 +5,12 @@ class FullHouse < PokerHandCheck
 
   def run_check
     if triple? && pair?
-      [
-        :full_house,
-        [@triple, @pair]
-      ]
+      Hand.new(
+        hand: :full_house,
+        suit: :NA,
+        triple: @triple,
+        pair: @pair
+      )
     else
       :not_present
     end
