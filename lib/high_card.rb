@@ -1,8 +1,10 @@
 class HighCard < PokerHandCheck
   def run_check
-    [
-      :high_card,
-      [cards.first.value]
-    ]
+    Hand.new(
+      hand:   :high_card,
+      cards:  [cards.first],
+      suit:   :NA,
+      kicker: cards[1..-1]
+    )
   end
 end

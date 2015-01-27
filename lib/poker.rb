@@ -1,4 +1,6 @@
+require 'set'
 require_relative './card'
+require_relative './hand'
 require_relative './poker_hand_check'
 require_relative './counts_by_suit'
 require_relative './counts_by_value'

@@ -9,10 +9,12 @@ class Straight < PokerHandCheck
 
   def run_check
     if straight?
-      [
-        :straight,
-        [high_card.value]
-      ]
+      Hand.new(
+        hand:      :straight,
+        cards:     cards,
+        suit:      :NA,
+        high_card: @high_card
+      )
     else
       :not_present
     end

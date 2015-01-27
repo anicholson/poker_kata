@@ -5,19 +5,22 @@ class Pair < PokerHandCheck
 
   def run_check
     if pair?
-      [
-        :pair,
-        [@pair]
-      ]
+      Hand.new(
+        hand: :pair,
+        cards: @pair,
+        suit: :NA
+      )
     else
       :not_present
     end
   end
 
   def pair?
-    @pair = count_of_card_values.detect do |_value, count|
+    pair_value = count_of_card_values.detect do |_value, count|
       count == 2
     end.first
+
+    @pair = cards.select {|card| card.value == pair_value }
   rescue
     false
   end
